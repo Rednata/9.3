@@ -6,11 +6,15 @@ export class ClassComponent extends React.Component {
   state = {
     result: 'Результат',
     userNumber: '',
-    randomNumber: Math.floor(Math.random() *
-      (this.props.max - this.props.min + 1) + this.props.min),
+    randomNumber: this.randomFunc(),
     count: 0,
     newGame: false
   };
+
+  randomFunc() {
+    return Math.floor(Math.random() *
+      (this.props.max - this.props.min + 1) + this.props.min);
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -38,9 +42,7 @@ export class ClassComponent extends React.Component {
       };
     });
 
-    this.setState({
-      userNumber: '',
-    });
+    this.setState(() => ({userNumber: ''}));
   };
 
   handleChange = (e) => {
@@ -53,8 +55,7 @@ export class ClassComponent extends React.Component {
     this.setState({
       result: 'Результат',
       count: 0,
-      randomNumber: Math.floor(Math.random() *
-      (this.props.max - this.props.min + 1) + this.props.min),
+      randomNumber: this.randomFunc(),
       newGame: false,
     });
   };
